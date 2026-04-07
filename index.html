@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Рога и Копыта — оптовая продажа по всей России</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #c0392b;
+      --primary-dark: #96281b;
+      --accent: #e67e22;
+      --dark: #2c2c2c;
+      --light: #f9f5f0;
+      --text: #444;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: var(--text);
+      background: var(--light);
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--dark);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .logo-icon {
+      font-size: 32px;
+    }
+    .logo-text {
+      color: #fff;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .logo-text span { color: var(--accent); }
+    nav a {
+      color: #ccc;
+      text-decoration: none;
+      margin-left: 28px;
+      font-size: 15px;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: #fff; }
+    .header-cta {
+      background: var(--primary);
+      color: #fff !important;
+      padding: 9px 20px;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background 0.2s !important;
+    }
+    .header-cta:hover { background: var(--primary-dark) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #1a1a1a 0%, #3d1a1a 100%);
+      color: #fff;
+      padding: 90px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-emoji { font-size: 64px; display: block; margin-bottom: 20px; }
+    .hero h1 {
+      font-size: 52px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p {
+      font-size: 20px;
+      color: #ddd;
+      max-width: 620px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      padding: 16px 36px;
+      border: none;
+      border-radius: 8px;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+    .btn-secondary {
+      background: transparent;
+      color: #fff;
+      padding: 16px 36px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-radius: 8px;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .btn-secondary:hover { border-color: #fff; transform: translateY(-2px); }
+
+    /* ── STATS ── */
+    .stats {
+      background: var(--primary);
+      padding: 36px 40px;
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; color: #fff; }
+    .stat-num { font-size: 40px; font-weight: 800; }
+    .stat-label { font-size: 14px; opacity: 0.85; margin-top: 4px; }
+
+    /* ── SECTION BASE ── */
+    section { padding: 80px 40px; }
+    .section-title {
+      text-align: center;
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      text-align: center;
+      color: #888;
+      font-size: 17px;
+      margin-bottom: 52px;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* ── PRODUCTS ── */
+    .products { background: #fff; }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+    }
+    .product-card {
+      background: var(--light);
+      border-radius: 12px;
+      padding: 32px 24px;
+      text-align: center;
+      border: 1px solid #e8e0d8;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+    .product-emoji { font-size: 52px; margin-bottom: 16px; display: block; }
+    .product-card h3 { font-size: 20px; color: var(--dark); margin-bottom: 10px; }
+    .product-card p { font-size: 15px; color: #777; line-height: 1.6; margin-bottom: 20px; }
+    .product-price { font-size: 22px; font-weight: 700; color: var(--primary); margin-bottom: 16px; }
+    .btn-order {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+    .btn-order:hover { background: var(--primary-dark); }
+
+    /* ── WHY US ── */
+    .why { background: var(--light); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+    .why-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 28px 22px;
+      text-align: center;
+      border: 1px solid #e8e0d8;
+    }
+    .why-icon { font-size: 40px; margin-bottom: 14px; }
+    .why-card h4 { font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+    .why-card p { font-size: 14px; color: #888; line-height: 1.6; }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: #fff;
+      text-align: center;
+      padding: 80px 40px;
+    }
+    .cta-section h2 { font-size: 38px; font-weight: 800; margin-bottom: 16px; }
+    .cta-section p { font-size: 18px; opacity: 0.9; margin-bottom: 36px; max-width: 550px; margin-left: auto; margin-right: auto; }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-white {
+      background: #fff;
+      color: var(--primary);
+      padding: 16px 36px;
+      border: none;
+      border-radius: 8px;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.2s;
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+    .btn-outline-white {
+      background: transparent;
+      color: #fff;
+      padding: 16px 36px;
+      border: 2px solid rgba(255,255,255,0.6);
+      border-radius: 8px;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .btn-outline-white:hover { border-color: #fff; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: #aaa;
+      text-align: center;
+      padding: 32px 40px;
+      font-size: 14px;
+    }
+    footer strong { color: #fff; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      .hero h1 { font-size: 34px; }
+      .hero p { font-size: 16px; }
+      nav { display: none; }
+      .stats { gap: 30px; }
+      .stat-num { font-size: 30px; }
+      section { padding: 60px 20px; }
+      .section-title { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="#">
+    <span class="logo-icon">🦌</span>
+    <span class="logo-text">Рога <span>&</span> Копыта</span>
+  </a>
+  <nav>
+    <a href="#products">Продукция</a>
+    <a href="#why">О нас</a>
+    <a href="#contact" class="header-cta" onclick="openChat()">Написать нам</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="hero-emoji">🦌</span>
+  <h1>Рога и Копыта —<br><span>оптом по всей России</span></h1>
+  <p>Поставляем натуральное сырьё животного происхождения крупным и средним оптом. Работаем напрямую с производителями — без посредников.</p>
+  <div class="hero-buttons">
+    <button class="btn-primary" onclick="openChat()">💬 Написать в чат</button>
+    <a class="btn-secondary" href="#products">Смотреть продукцию</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num">15+</div>
+    <div class="stat-label">лет на рынке</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">2 400</div>
+    <div class="stat-label">клиентов по России</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">85</div>
+    <div class="stat-label">регионов доставки</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">98%</div>
+    <div class="stat-label">довольных клиентов</div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="container">
+    <h2 class="section-title">Наша продукция</h2>
+    <p class="section-sub">Натуральное сырьё высшего качества с сертификатами</p>
+    <div class="products-grid">
+      <div class="product-card">
+        <span class="product-emoji">🦌</span>
+        <h3>Рога оленьи</h3>
+        <p>Свежесрезанные и высушенные рога северного оленя. Применяются в фармацевтике и декоре.</p>
+        <div class="product-price">от 1 200 ₽/кг</div>
+        <button class="btn-order" onclick="openChat()">Узнать цену</button>
+      </div>
+      <div class="product-card">
+        <span class="product-emoji">🐄</span>
+        <h3>Рога крупного рогатого скота</h3>
+        <p>Очищенные рога КРС для производства пуговиц, рукояток, сувенирной продукции.</p>
+        <div class="product-price">от 280 ₽/кг</div>
+        <button class="btn-order" onclick="openChat()">Узнать цену</button>
+      </div>
+      <div class="product-card">
+        <span class="product-emoji">🐎</span>
+        <h3>Копыта лошадиные</h3>
+        <p>Переработанные и высушенные копыта лошадей. Используются как удобрение и в косметологии.</p>
+        <div class="product-price">от 95 ₽/кг</div>
+        <button class="btn-order" onclick="openChat()">Узнать цену</button>
+      </div>
+      <div class="product-card">
+        <span class="product-emoji">🦬</span>
+        <h3>Копыта КРС</h3>
+        <p>Копыта крупного рогатого скота оптом. Высокое содержание кератина. Экспортное качество.</p>
+        <div class="product-price">от 70 ₽/кг</div>
+        <button class="btn-order" onclick="openChat()">Узнать цену</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why" id="why">
+  <div class="container">
+    <h2 class="section-title">Почему выбирают нас</h2>
+    <p class="section-sub">Надёжный партнёр для вашего бизнеса</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">📋</div>
+        <h4>Все сертификаты</h4>
+        <p>Ветеринарные справки, сертификаты качества и происхождения на каждую партию товара.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🚚</div>
+        <h4>Доставка по России</h4>
+        <p>Работаем с транспортными компаниями во всех 85 регионах. Отправка от 500 кг.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💰</div>
+        <h4>Честные цены</h4>
+        <p>Прямые поставки без посредников. Скидки от объёма. Гибкие условия оплаты для постоянных клиентов.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🤝</div>
+        <h4>Личный менеджер</h4>
+        <p>За каждым клиентом закрепляется персональный менеджер. Отвечаем за 15 минут в рабочее время.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🏭</div>
+        <h4>Собственное производство</h4>
+        <p>Работаем напрямую с хозяйствами и переработчиками. Полный контроль качества на всех этапах.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📦</div>
+        <h4>Гибкая упаковка</h4>
+        <p>Отгружаем в мешках, биг-бэгах, навалом — под требования вашего производства.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>Готовы сделать заказ?</h2>
+  <p>Напишите нам прямо сейчас — ответим за 15 минут и рассчитаем стоимость для вашего объёма.</p>
+  <div class="cta-buttons">
+    <button class="btn-white" onclick="openChat()">💬 Написать в чат</button>
+    <button class="btn-outline-white" onclick="openChat()">📞 Заказать звонок</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>ООО «Рога и Копыта»</strong> &nbsp;|&nbsp; Россия, Москва &nbsp;|&nbsp; ИНН 7700000000</p>
+  <p style="margin-top:8px;">© 2024 Все права защищены</p>
+</footer>
+
+<!-- MANGO ДИАЛОГИ -->
+<script>
+  (function(w, d, u, i, o, s, p) {
+    if (d.getElementById(i)) { return; }
+    w['MangoObject'] = o;
+    w[o] = w[o] || function() { (w[o].q = w[o].q || []).push(arguments) };
+    w[o].u = u; w[o].t = 1 * new Date();
+    s = d.createElement('script'); s.async = 1; s.id = i;
+    s.src = u; s.charset = 'utf-8';
+    p = d.getElementsByTagName('script')[0];
+    p.parentNode.insertBefore(s, p);
+  }(window, document,
+    '//widgets.mango-office.ru/widgets/mango.js',
+    'mango-js', 'mgo'));
+  mgo({multichannel: {id: 22531}});
+
+  // Открытие чата по кнопкам на странице
+  function openChat() {
+    if (window.mgo) {
+      mgo('open');
+    }
+  }
+</script>
+
+</body>
+</html>
